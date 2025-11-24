@@ -20,24 +20,22 @@ const ProductPage = ({ params }: PageProps) => {
    // const { slug } = params;
 
     
-    useEffect(() => {
-		(async () => {
-			try {
-                const response = await fetch(`/api/products`);
-                setProductList( response?.products?.length ? await response.products : []);
-			} catch (error) {
-                console.error("Error:", error);
-            }
-		})();
-	}, []);
+    
+   useEffect(() => {
+    const fetchProducts = async () => {
+        const response = await fetch('/api/products');
+        const data = await response.json();
+        setProductList(data.products); // Adjust according to the structure of the API response
+    };
+
+    fetchProducts().catch(console.error);
+}, []);
 
 
-    console.log('productList', productList);
-
-    if(!productList?.products?.length) return null;
+    if(!productList?.length) return null;
 
     return (
-        <ProductList productList={productList.products}/>
+        <ProductList productList={productList}/>
     );
 }
 

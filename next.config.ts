@@ -3,6 +3,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [new URL('https://cdn.dummyjson.com/product-images/**')],
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",
