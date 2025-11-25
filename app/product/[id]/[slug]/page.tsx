@@ -2,28 +2,27 @@ import Product from '@/components/product/product.component';
 import { Metadata } from 'next';
 
 interface PageProps {
-    params: {
         slug: string;
         id: string;
-    };
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<PageProps>}): Promise<Metadata> {
 
     return {
-        title: `Product - ${params.slug}`,
+        title: `Product`,
     };
 }
-const ProductPage = async ({params}: PageProps) => {
 
-        const { id } = params;
-        
+const ProductPage = async ({ params }: { params: Promise<PageProps>}) => {
+
+    const { id } = await params;
+      
     try {
-        const response = await fetch(`/api/product?id=${id}`, {
+        const response = await fetch(`http://localhost:3000/api/product?id=${id}`, {
             cache: 'no-store'
         });
-        
-        if (!response.ok) {
+   
+        if (response.status !== 200) {
             throw new Error('Failed to fetch product');
         }
         

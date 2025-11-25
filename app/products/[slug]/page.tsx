@@ -10,7 +10,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     return {
-        title: `Product List - ${params?.slug}`,
+        title: `Product List`,
     };
 }
 
