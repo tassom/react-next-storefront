@@ -6,10 +6,13 @@ interface PageProps {
         id: string;
 }
 
-export async function generateMetadata({ params }: { params: Promise<PageProps>}): Promise<Metadata> {
+const formatSlug = (slug:string) => slug.replaceAll("-", " ").split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
+
+export async function generateMetadata({ params }: { params: Promise<PageProps>}): Promise<Metadata> {
+    const { slug } = await params;
     return {
-        title: `Product`,
+        title: `Product - ${formatSlug(slug)}`,
     };
 }
 

@@ -1,5 +1,5 @@
 
-import ProductList from '@/components/products/productList.component';
+import ProductList from '@/components/productsList/productList.component';
 import { Metadata } from 'next';
 
 interface PageProps {
